@@ -1,5 +1,6 @@
 class BookingModel{
     constructor(){
+		this.initLocalStorage();
         this.cinemaData = JSON.parse(localStorage.getItem("moviesData")) || {};
         this.currentMovieId = 1;
         this.currentMovieTitle = "";
@@ -11,6 +12,11 @@ class BookingModel{
         this.getCurrentMovieTitle();
         return this.getCurrentSeance();
     }
+	initLocalStorage(){
+		if (!localStorage.getItem("moviesData")) {
+			localStorage.setItem("moviesData", JSON.stringify(MOVIE_LIST));
+		}
+	}
     saveToLocalStorage(){
         localStorage.setItem("moviesData", JSON.stringify(this.cinemaData));
     }
